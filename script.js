@@ -42,6 +42,41 @@ if (orb && !prefersReducedMotion) {
   startPhase();
 }
 
+// ========== HERO PARALLAX ON MOUSE MOVE ==========
+const hero = document.querySelector('.hero');
+if (hero) {
+  const moveElements = hero.querySelectorAll('.collage-main, .collage-yinyang, .collage-moon, .collage-star, .hero-anchor');
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    moveElements.forEach((el, i) => {
+      const speed = (i + 1) * 8;
+      const rotateSpeed = (i + 1) * 1.5;
+      el.style.transition = 'transform 0.3s ease-out';
+      el.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${x * rotateSpeed}deg)`;
+    });
+
+    // Blobs move slower, opposite direction
+    hero.querySelectorAll('.blob').forEach((blob, i) => {
+      const speed = (i + 1) * -15;
+      blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    moveElements.forEach(el => {
+      el.style.transition = 'transform 0.6s ease-out';
+      el.style.transform = '';
+    });
+    hero.querySelectorAll('.blob').forEach(blob => {
+      blob.style.transform = '';
+    });
+  });
+}
+
 // ========== MOBILE MENU ==========
 const menuToggle = document.querySelector('.menu-toggle');
 const navOverlay = document.querySelector('.nav-overlay');
