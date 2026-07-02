@@ -42,30 +42,7 @@ if (orb && !prefersReducedMotion) {
   startPhase();
 }
 
-// ========== HERO HOVER — subtle reactions ==========
-document.querySelectorAll('.collage-yinyang, .collage-moon, .collage-star, .hero-anchor').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    el.style.transition = 'transform 0.4s ease';
-    el.style.transform = 'scale(1.12) rotate(6deg)';
-  });
-  el.addEventListener('mouseleave', () => {
-    el.style.transition = 'transform 0.5s ease';
-    el.style.transform = '';
-  });
-});
-
-// Selfie slight lift
-const selfie = document.querySelector('.collage-main');
-if (selfie) {
-  selfie.addEventListener('mouseenter', () => {
-    selfie.style.transition = 'transform 0.4s ease';
-    selfie.style.transform = 'translate(-50%, -50%) rotate(0deg) scale(1.03)';
-  });
-  selfie.addEventListener('mouseleave', () => {
-    selfie.style.transition = 'transform 0.5s ease';
-    selfie.style.transform = '';
-  });
-}
+// hover effects handled in CSS now
 
 // ========== MOBILE MENU ==========
 const menuToggle = document.querySelector('.menu-toggle');
