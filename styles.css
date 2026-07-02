@@ -192,11 +192,10 @@ body {
 }
 
 @keyframes btn-color-cycle {
-  0%   { background: var(--fuchsia); }
-  25%  { background: var(--jade); }
-  50%  { background: var(--amber); }
-  75%  { background: var(--poppy); }
-  100% { background: var(--fuchsia); }
+  0%   { background: var(--fuchsia); color: var(--bone); }
+  33%  { background: var(--amber); color: var(--ink); }
+  66%  { background: var(--jade); color: var(--ink); }
+  100% { background: var(--fuchsia); color: var(--bone); }
 }
 
 @media (prefers-reduced-motion: reduce) {
