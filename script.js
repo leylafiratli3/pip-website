@@ -42,38 +42,28 @@ if (orb && !prefersReducedMotion) {
   startPhase();
 }
 
-// ========== HERO PARALLAX ON MOUSE MOVE ==========
-const hero = document.querySelector('.hero');
-if (hero) {
-  const moveElements = hero.querySelectorAll('.collage-main, .collage-yinyang, .collage-moon, .collage-star, .hero-anchor');
-
-  hero.addEventListener('mousemove', (e) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    moveElements.forEach((el, i) => {
-      const speed = (i + 1) * 8;
-      const rotateSpeed = (i + 1) * 1.5;
-      el.style.transition = 'transform 0.3s ease-out';
-      el.style.transform = `translate(${x * speed}px, ${y * speed}px) rotate(${x * rotateSpeed}deg)`;
-    });
-
-    // Blobs move slower, opposite direction
-    hero.querySelectorAll('.blob').forEach((blob, i) => {
-      const speed = (i + 1) * -15;
-      blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-    });
+// ========== HERO HOVER — subtle reactions ==========
+document.querySelectorAll('.collage-yinyang, .collage-moon, .collage-star, .hero-anchor').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    el.style.transition = 'transform 0.4s ease';
+    el.style.transform = 'scale(1.12) rotate(6deg)';
   });
+  el.addEventListener('mouseleave', () => {
+    el.style.transition = 'transform 0.5s ease';
+    el.style.transform = '';
+  });
+});
 
-  hero.addEventListener('mouseleave', () => {
-    moveElements.forEach(el => {
-      el.style.transition = 'transform 0.6s ease-out';
-      el.style.transform = '';
-    });
-    hero.querySelectorAll('.blob').forEach(blob => {
-      blob.style.transform = '';
-    });
+// Selfie slight lift
+const selfie = document.querySelector('.collage-main');
+if (selfie) {
+  selfie.addEventListener('mouseenter', () => {
+    selfie.style.transition = 'transform 0.4s ease';
+    selfie.style.transform = 'translate(-50%, -50%) rotate(0deg) scale(1.03)';
+  });
+  selfie.addEventListener('mouseleave', () => {
+    selfie.style.transition = 'transform 0.5s ease';
+    selfie.style.transform = '';
   });
 }
 
