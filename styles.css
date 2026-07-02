@@ -256,7 +256,7 @@ body {
   position: fixed;
   top: 0; left: 0; width: 100%;
   z-index: 100;
-  background: rgba(65,23,140,0.92);
+  background: rgba(0,0,0,0.92);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(203,185,186,0.06);
   transition: box-shadow 0.3s;
@@ -279,7 +279,21 @@ body {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.5rem;
-  color: var(--bone);
+  color: var(--poppy);
+  animation: disco-text 4s ease-in-out infinite;
+}
+
+@keyframes disco-text {
+  0%   { color: var(--poppy); text-shadow: 0 0 8px rgba(10,30,128,0.4); }
+  20%  { color: var(--fuchsia); text-shadow: 0 0 8px rgba(255,61,139,0.4); }
+  40%  { color: var(--jade); text-shadow: 0 0 8px rgba(125,255,232,0.4); }
+  60%  { color: var(--amber); text-shadow: 0 0 8px rgba(255,176,58,0.4); }
+  80%  { color: #c246a3; text-shadow: 0 0 8px rgba(194,70,163,0.4); }
+  100% { color: var(--poppy); text-shadow: 0 0 8px rgba(10,30,128,0.4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark { animation: none; color: var(--poppy); }
 }
 
 .desktop-nav {
