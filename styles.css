@@ -2533,7 +2533,7 @@ body {
    =========================== */
 .ct-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   min-height: 100vh;
 }
 
@@ -2562,7 +2562,7 @@ body {
 
 .ct-moon {
   position: absolute;
-  top: 18%;
+  top: -15%;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
