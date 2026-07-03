@@ -2363,6 +2363,146 @@ body {
 }
 
 /* ===========================
+   PRACTICE PAGE
+   =========================== */
+.practice-page {
+  background: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.practice-inner {
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.practice-page h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--bone);
+  margin-bottom: 1rem;
+}
+
+.practice-sub {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--bone-dim);
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.practice-player {
+  margin-bottom: 3rem;
+}
+
+.practice-audio {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 999px;
+  filter: invert(1) hue-rotate(180deg) brightness(1.2);
+}
+
+.practice-note {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--bone-dim);
+  opacity: 0.4;
+  margin-top: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.practice-note code {
+  color: var(--jade);
+  opacity: 1;
+}
+
+.practice-after {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--bone-dim);
+  line-height: 1.7;
+}
+
+/* Floating clouds */
+.practice-cloud {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+  z-index: 1;
+}
+
+.practice-cloud--1 {
+  width: 300px;
+  top: 8%;
+  left: -5%;
+  animation: cloud-drift 30s linear infinite;
+}
+
+.practice-cloud--2 {
+  width: 200px;
+  top: 20%;
+  right: -8%;
+  animation: cloud-drift 35s linear infinite -10s;
+}
+
+.practice-cloud--3 {
+  width: 250px;
+  bottom: 15%;
+  left: 10%;
+  animation: cloud-drift 28s linear infinite -5s;
+}
+
+.practice-cloud--4 {
+  width: 180px;
+  bottom: 30%;
+  right: 5%;
+  animation: cloud-drift 32s linear infinite -15s;
+}
+
+.practice-cloud--5 {
+  width: 220px;
+  top: 50%;
+  left: 40%;
+  animation: cloud-drift 26s linear infinite -20s;
+  opacity: 0.08;
+}
+
+@keyframes cloud-drift {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(60px); }
+  100% { transform: translateX(0); }
+}
+
+.practice-moon {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 100px;
+  pointer-events: none;
+  opacity: 0.3;
+  z-index: 1;
+  animation: float-item 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practice-cloud { animation: none; }
+  .practice-moon { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .practice-page { padding: 7rem 1.5rem 3rem; }
+  .practice-cloud--1, .practice-cloud--2 { width: 150px; }
+  .practice-cloud--3, .practice-cloud--4, .practice-cloud--5 { display: none; }
+}
+
+/* ===========================
    BOOK PAGE v2 — no hero, inline intro
    =========================== */
 .bk-page {
