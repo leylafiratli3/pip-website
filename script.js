@@ -86,12 +86,17 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-// Apply reveal to sections
+// Apply reveal to sections (home page)
 document.querySelectorAll(
   '.why-left, .why-right, .pull-quote blockquote, .cta-inner, ' +
   '.offerings h2, .marquee, .about-me-images, .about-me-text'
 ).forEach(el => {
   el.classList.add('reveal');
+  revealObserver.observe(el);
+});
+
+// Observe any element that already has .reveal in HTML (e.g. about page)
+document.querySelectorAll('.reveal').forEach(el => {
   revealObserver.observe(el);
 });
 
