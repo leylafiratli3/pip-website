@@ -2562,13 +2562,12 @@ body {
 
 .ct-moon {
   position: absolute;
-  top: -40px;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;
+  width: 120px;
   z-index: 2;
   filter: drop-shadow(0 0 15px rgba(125,255,232,0.15));
-  animation: float-item 8s ease-in-out infinite;
 }
 
 .ct-photo {
