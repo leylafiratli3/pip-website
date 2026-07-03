@@ -1812,6 +1812,74 @@ body {
   border-bottom: none;
 }
 
+/* Tidbits grid */
+.tidbits {
+  background: var(--bone);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.tidbits h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--ink);
+  margin-bottom: 3rem;
+}
+
+.tidbits-grid {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tidbits-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid rgba(45,5,115,0.1);
+}
+
+.tidbits-row:last-child { border-bottom: none; }
+
+.tidbit-cell {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid rgba(45,5,115,0.1);
+}
+
+.tidbit-cell:last-child { border-right: none; }
+
+.tidbit-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fuchsia);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.tidbits-row:nth-child(2) .tidbit-label { color: var(--jade); }
+.tidbits-row:nth-child(3) .tidbit-label { color: var(--amber); }
+
+.tidbit-cell p {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .tidbits-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tidbit-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(45,5,115,0.06);
+    padding: 1.5rem 1rem;
+  }
+
+  .tidbit-cell:last-child { border-bottom: none; }
+}
+
 /* About CTA */
 .about-cta {
   background: #000;
