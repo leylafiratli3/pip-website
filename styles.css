@@ -2581,15 +2581,15 @@ body {
 
 .ct-left h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   color: var(--bone);
   line-height: 1.2;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .ct-subtitle {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   color: var(--bone-dim);
   margin-bottom: 2.5rem;
 }
