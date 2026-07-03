@@ -2546,13 +2546,14 @@ body {
 }
 
 .ct-left-inner {
-  max-width: 600px;
+  max-width: 750px;
+  width: 100%;
 }
 
 .ct-left-grid {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2.5rem;
+  grid-template-columns: auto 1.5fr;
+  gap: 3rem;
   align-items: end;
 }
 
