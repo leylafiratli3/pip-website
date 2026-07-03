@@ -2546,14 +2546,20 @@ body {
 }
 
 .ct-left-inner {
-  max-width: 380px;
+  max-width: 600px;
+}
+
+.ct-left-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.5rem;
+  align-items: center;
 }
 
 .ct-photo {
-  width: 200px;
+  width: 280px;
   height: auto;
   object-fit: contain;
-  margin-bottom: 2rem;
   filter: drop-shadow(0 12px 30px rgba(0,0,0,0.3));
 }
 
@@ -2690,8 +2696,7 @@ a.ct-detail-item:hover {
   .ct-split { grid-template-columns: 1fr; }
   .ct-left { padding: 7rem 2rem 3rem; text-align: center; }
   .ct-left-inner { max-width: 100%; }
-  .ct-photo { margin-left: auto; margin-right: auto; }
-  .ct-details { align-items: center; }
-  .ct-anchor { margin: 0 auto; }
+  .ct-left-grid { grid-template-columns: 1fr; justify-items: center; gap: 1.5rem; }
+  .ct-photo { width: 200px; }
   .ct-right { padding: 3rem 2rem 4rem; }
 }
