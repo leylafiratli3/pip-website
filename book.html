@@ -11,10 +11,8 @@
 </head>
 <body>
 
-  <!-- Film grain overlay -->
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- ========== NAV ========== -->
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="wordmark">Pip Raine</a>
@@ -41,74 +39,89 @@
     </nav>
   </header>
 
-  <!-- ========== BOOK HERO ========== -->
-  <section class="book-hero">
-    <div class="blob blob--1" aria-hidden="true"></div>
-    <div class="blob blob--2" aria-hidden="true"></div>
-    <div class="book-hero-inner">
-      <h1>Book a <em>Session</em></h1>
-      <p class="book-hero-sub">Your breath is already yours. This is just the space to remember that. Choose the container that feels right and let's begin.</p>
+  <!-- ========== INLINE INTRO + CARDS ========== -->
+  <section class="bk-page">
+    <div class="bk-intro reveal">
+      <div class="bk-intro-text">
+        <h1>Choose the container that feels right.</h1>
+        <p>Your breath is already yours. This is just the space to remember that.</p>
+      </div>
+      <img src="assets/pip_anchor.png" alt="" class="bk-intro-anchor" aria-hidden="true">
+    </div>
+
+    <div class="bk-cards">
+      <!-- Card 1 -->
+      <div class="bk-card bk-card--1 reveal">
+        <div class="bk-card-accent"></div>
+        <div class="bk-card-body">
+          <div class="bk-card-icon">
+            <img src="assets/tiger.png" alt="">
+          </div>
+          <div class="bk-card-content">
+            <h3>1:1 Sessions</h3>
+            <p>A private container shaped around your body, your pace, your breath. Deep personal work held in a safe, one-to-one space where you set the rhythm.</p>
+            <div class="bk-card-meta">
+              <span>60 min</span>
+              <span>Online or In-Person</span>
+            </div>
+          </div>
+          <a href="#scheduler" class="btn btn--fuchsia">Book Now</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bk-card bk-card--2 reveal">
+        <div class="bk-card-accent"></div>
+        <div class="bk-card-body">
+          <div class="bk-card-icon">
+            <img src="assets/3.png" alt="">
+          </div>
+          <div class="bk-card-content">
+            <h3>Group Breathwork</h3>
+            <p>Collective sessions for shared regulation. Something shifts when we breathe in the same room. These groups hold space for strangers to become witnesses.</p>
+            <div class="bk-card-meta">
+              <span>90 min</span>
+              <span>In-Person & Virtual</span>
+            </div>
+          </div>
+          <a href="#scheduler" class="btn btn--jade">Book Now</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bk-card bk-card--3 reveal">
+        <div class="bk-card-accent"></div>
+        <div class="bk-card-body">
+          <div class="bk-card-icon">
+            <img src="assets/7.png" alt="">
+          </div>
+          <div class="bk-card-content">
+            <h3>Queer & Creative Sessions</h3>
+            <p>Dedicated space for LGBTQ+ folks, musicians, and artists. Come as you are. These sessions honour the ways queer and creative bodies carry everything.</p>
+            <div class="bk-card-meta">
+              <span>75 min</span>
+              <span>Online or In-Person</span>
+            </div>
+          </div>
+          <a href="#scheduler" class="btn btn--amber">Book Now</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ========== SESSION CARDS ========== -->
-  <section class="book-sessions">
-    <div class="book-sessions-grid">
-
-      <div class="book-card book-card--1 reveal">
-        <div class="offer-circle">
-          <img src="assets/tiger.png" alt="Tiger icon">
-        </div>
-        <h3>1:1 Sessions</h3>
-        <p class="book-card-desc">A private container shaped around your body, your pace, your breath. This is deep personal work held in a safe, one-to-one space where you set the rhythm. We go at the speed your nervous system allows, peeling back layers with care and intention.</p>
-        <div class="book-card-meta">
-          <span>60 min</span>
-          <span>Online or In-Person</span>
-        </div>
-        <a href="#scheduler" class="btn btn--fuchsia">Book Now</a>
-      </div>
-
-      <div class="book-card book-card--2 reveal">
-        <div class="offer-circle">
-          <img src="assets/3.png" alt="Dolphin icon">
-        </div>
-        <h3>Group Breathwork</h3>
-        <p class="book-card-desc">Collective sessions for shared regulation and community healing. Something powerful shifts when we breathe together. These groups hold space for strangers to become witnesses, and for the nervous system to feel what safety sounds like in numbers.</p>
-        <div class="book-card-meta">
-          <span>90 min</span>
-          <span>In-Person &amp; Virtual Groups</span>
-        </div>
-        <a href="#scheduler" class="btn btn--jade">Book Now</a>
-      </div>
-
-      <div class="book-card book-card--3 reveal">
-        <div class="offer-circle">
-          <img src="assets/7.png" alt="Owl icon">
-        </div>
-        <h3>Queer &amp; Creative Sessions</h3>
-        <p class="book-card-desc">Dedicated space for LGBTQ+ folks, musicians, and artists. Come as you are, no masks required. These sessions honour the particular ways queer and creative bodies carry tension, joy, grief, and liberation. Your full self is welcome here.</p>
-        <div class="book-card-meta">
-          <span>75 min</span>
-          <span>Online or In-Person</span>
-        </div>
-        <a href="#scheduler" class="btn btn--amber">Book Now</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========== SCHEDULER PLACEHOLDER ========== -->
-  <section class="book-scheduler" id="scheduler">
-    <div class="book-scheduler-inner">
-      <h2>Choose a <em>Time</em></h2>
+  <!-- ========== SCHEDULER ========== -->
+  <section class="bk-scheduler" id="scheduler">
+    <div class="bk-scheduler-inner">
+      <img src="assets/4.png" alt="" class="pq-star pq-star--1" aria-hidden="true">
+      <img src="assets/4.png" alt="" class="pq-star pq-star--4" aria-hidden="true">
+      <h2>Choose a Time</h2>
       <div class="scheduler-placeholder">
         <p>Scheduling widget coming soon</p>
-        <p class="scheduler-note">In the meantime, reach out via the <a href="contact.html">contact page</a> to arrange your session.</p>
+        <p class="scheduler-note">In the meantime, <a href="contact.html">get in touch</a> to arrange your session.</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="footer-inner">
       <a href="index.html" class="wordmark">Pip Raine</a>

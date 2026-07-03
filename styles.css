@@ -2364,3 +2364,327 @@ body {
     padding: 2rem 1.5rem;
   }
 }
+
+/* ===========================
+   BOOK PAGE v2 — no hero, inline intro
+   =========================== */
+.bk-page {
+  background: var(--ink);
+  padding: 8rem 2rem 4rem;
+}
+
+.bk-intro {
+  max-width: 1000px;
+  margin: 0 auto 4rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.bk-intro-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  color: var(--bone);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.bk-intro-text p {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--bone-dim);
+  line-height: 1.7;
+  max-width: 450px;
+}
+
+.bk-intro-anchor {
+  width: 140px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 20px rgba(125,255,232,0.15));
+  animation: float-item 8s ease-in-out infinite;
+}
+
+/* Horizontal cards */
+.bk-cards {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bk-card {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(203,185,186,0.06);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.3s;
+}
+
+.bk-card:hover { transform: translateY(-3px); }
+
+.bk-card--1:hover { border-color: var(--fuchsia); box-shadow: 0 0 40px rgba(255,61,139,0.1); }
+.bk-card--2:hover { border-color: var(--jade); box-shadow: 0 0 40px rgba(125,255,232,0.1); }
+.bk-card--3:hover { border-color: var(--amber); box-shadow: 0 0 40px rgba(255,176,58,0.1); }
+
+/* Accent bar on the left */
+.bk-card-accent {
+  width: 5px;
+  flex-shrink: 0;
+}
+
+.bk-card--1 .bk-card-accent { background: var(--fuchsia); }
+.bk-card--2 .bk-card-accent { background: var(--jade); }
+.bk-card--3 .bk-card-accent { background: var(--amber); }
+
+.bk-card-body {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.5rem;
+  flex: 1;
+}
+
+.bk-card-icon {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.bk-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bk-card-content {
+  flex: 1;
+}
+
+.bk-card-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--bone);
+  margin-bottom: 0.5rem;
+}
+
+.bk-card-content p {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--bone-dim);
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+.bk-card-meta {
+  display: flex;
+  gap: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.bk-card-meta span {
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(203,185,186,0.12);
+  border-radius: 999px;
+}
+
+.bk-card .btn {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* Scheduler v2 */
+.bk-scheduler {
+  background: #000;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bk-scheduler-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.bk-scheduler h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--bone);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .bk-intro { flex-direction: column; text-align: center; }
+  .bk-intro-anchor { width: 100px; }
+
+  .bk-card-body { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+  .bk-card-meta { justify-content: center; flex-wrap: wrap; }
+  .bk-card { flex-direction: column; }
+  .bk-card-accent { width: 100%; height: 4px; }
+}
+
+/* ===========================
+   CONTACT PAGE v2 — split screen
+   =========================== */
+.ct-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.ct-left {
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 3rem 4rem;
+}
+
+.ct-left-inner {
+  max-width: 380px;
+}
+
+.ct-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.ct-left h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--bone);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.ct-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.ct-detail-link {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--jade);
+  transition: color 0.2s;
+}
+
+.ct-detail-link:hover { color: var(--fuchsia); }
+
+.ct-detail-loc {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--bone-dim);
+}
+
+.ct-anchor {
+  width: 100px;
+  opacity: 0.3;
+  filter: brightness(2);
+}
+
+.ct-right {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 3rem 4rem;
+}
+
+.ct-form {
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ct-form h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--bone);
+  margin-bottom: 0.5rem;
+}
+
+.ct-form .form-group label {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--bone);
+}
+
+.ct-form .form-group input,
+.ct-form .form-group select,
+.ct-form .form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1.5px solid rgba(203,185,186,0.15);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.ct-form .form-group input::placeholder,
+.ct-form .form-group textarea::placeholder {
+  color: rgba(203,185,186,0.35);
+}
+
+.ct-form .form-group input:focus,
+.ct-form .form-group select:focus,
+.ct-form .form-group textarea:focus {
+  border-color: var(--jade);
+  box-shadow: 0 0 0 3px rgba(125,255,232,0.12);
+}
+
+.ct-form .form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.ct-form .form-group select {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23cbb9ba' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  padding-right: 3rem;
+}
+
+.ct-form .form-group select option {
+  background: var(--ink-2);
+  color: var(--bone);
+}
+
+.ct-form .btn {
+  border: none;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .ct-split { grid-template-columns: 1fr; }
+  .ct-left { padding: 7rem 2rem 3rem; text-align: center; }
+  .ct-left-inner { max-width: 100%; }
+  .ct-photo { margin-left: auto; margin-right: auto; }
+  .ct-details { align-items: center; }
+  .ct-anchor { margin: 0 auto; }
+  .ct-right { padding: 3rem 2rem 4rem; }
+}

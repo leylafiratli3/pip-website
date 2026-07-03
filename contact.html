@@ -11,10 +11,8 @@
 </head>
 <body>
 
-  <!-- Film grain overlay -->
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- ========== NAV ========== -->
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="wordmark">Pip Raine</a>
@@ -41,85 +39,59 @@
     </nav>
   </header>
 
-  <!-- ========== HERO ========== -->
-  <section class="contact-hero">
-    <div class="contact-hero-inner">
-      <h1>Let's <em>Connect</em></h1>
-      <p class="contact-hero-sub">Whether you're curious about breathwork, ready to book a session, or want to collaborate — I'd love to hear from you.</p>
-    </div>
-  </section>
-
-  <!-- ========== CONTACT FORM SECTION ========== -->
-  <section class="contact-section">
-    <div class="contact-grid">
-
-      <!-- Left column: contact info -->
-      <div class="contact-info">
-        <h2>Get in Touch</h2>
-
-        <div class="contact-detail">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,7 12,13 2,7"/></svg>
-          <div>
-            <span class="contact-label">Email</span>
-            <a href="mailto:hello@pipraine.com" class="contact-link">hello@pipraine.com</a>
-          </div>
+  <!-- ========== SPLIT CONTACT ========== -->
+  <section class="ct-split">
+    <!-- Left — personal, visual -->
+    <div class="ct-left">
+      <div class="ct-left-inner reveal reveal-left">
+        <img src="assets/pip_selfie.png" alt="Pip Raine" class="ct-photo">
+        <h1>I'd love to<br>hear from you.</h1>
+        <div class="ct-details">
+          <a href="mailto:hello@pipraine.com" class="ct-detail-link">hello@pipraine.com</a>
+          <a href="https://www.instagram.com/pipraine/" target="_blank" rel="noopener" class="ct-detail-link">@pipraine</a>
+          <span class="ct-detail-loc">Based in the UK</span>
         </div>
-
-        <div class="contact-detail">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div>
-            <span class="contact-label">Location</span>
-            <span class="contact-value">UK</span>
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--jade)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="var(--jade)" stroke="none"/></svg>
-          <div>
-            <span class="contact-label">Instagram</span>
-            <a href="https://www.instagram.com/pipraine/" target="_blank" rel="noopener" class="contact-link">@pipraine</a>
-          </div>
-        </div>
-
-        <p class="contact-note">I usually respond within 48 hours. For session bookings, you can also head straight to the <a href="book.html">booking page</a>.</p>
+        <img src="assets/pip_anchor.png" alt="" class="ct-anchor" aria-hidden="true">
       </div>
+    </div>
 
-      <!-- Right column: form -->
-      <form class="contact-form" action="#" method="post" novalidate>
+    <!-- Right — form -->
+    <div class="ct-right">
+      <form class="ct-form reveal reveal-right" action="#" method="post" novalidate>
+        <h2>Send a message</h2>
+
         <div class="form-group">
-          <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" required aria-label="Your name" placeholder="Your name" autocomplete="name">
+          <label for="ct-name">Name</label>
+          <input type="text" id="ct-name" name="name" required placeholder="Your name" autocomplete="name">
         </div>
 
         <div class="form-group">
-          <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" required aria-label="Your email address" placeholder="your@email.com" autocomplete="email">
+          <label for="ct-email">Email</label>
+          <input type="email" id="ct-email" name="email" required placeholder="your@email.com" autocomplete="email">
         </div>
 
         <div class="form-group">
-          <label for="contact-interest">I'm interested in...</label>
-          <select id="contact-interest" name="interest" required aria-label="What are you interested in">
+          <label for="ct-interest">I'm interested in...</label>
+          <select id="ct-interest" name="interest" required>
             <option value="" disabled selected>Select an option</option>
             <option value="1:1 Sessions">1:1 Sessions</option>
             <option value="Group Breathwork">Group Breathwork</option>
-            <option value="Queer & Creative Sessions">Queer &amp; Creative Sessions</option>
+            <option value="Queer & Creative Sessions">Queer & Creative Sessions</option>
             <option value="Collaboration">Collaboration</option>
             <option value="Other">Other</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="contact-message">Message</label>
-          <textarea id="contact-message" name="message" rows="6" required aria-label="Your message" placeholder="Tell me a little about what you're looking for..."></textarea>
+          <label for="ct-message">Message</label>
+          <textarea id="ct-message" name="message" rows="5" required placeholder="Tell me what you're looking for..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn--jade btn--lg contact-submit">Send Message</button>
+        <button type="submit" class="btn btn--jade btn--lg">Send Message</button>
       </form>
-
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="footer-inner">
       <a href="index.html" class="wordmark">Pip Raine</a>
