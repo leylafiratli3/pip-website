@@ -1918,53 +1918,43 @@ body {
 .vp-timeline {
   max-width: 700px;
   margin: 0 auto;
-  position: relative;
-  padding-left: 40px;
-}
-
-/* Vertical dotted line */
-.vp-timeline::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--jade) 0px,
-    var(--jade) 6px,
-    transparent 6px,
-    transparent 14px
-  );
 }
 
 .vp-card {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
-.vp-card:last-child { margin-bottom: 0; }
-
-/* Dot on the timeline */
-.vp-card::before {
+/* Colored dots below each card, centered, connecting them */
+.vp-card::after {
   content: '';
-  position: absolute;
-  left: -34px;
-  top: 2rem;
-  width: 12px;
-  height: 12px;
+  display: block;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--jade);
-  border: 2px solid var(--ink);
-  z-index: 1;
+  margin: 1.2rem auto;
+  box-shadow: 0 0 10px rgba(125,255,232,0.3);
 }
 
-.vp-card:nth-child(2)::before { background: var(--fuchsia); }
-.vp-card:nth-child(3)::before { background: var(--amber); }
-.vp-card:nth-child(4)::before { background: var(--jade); }
-.vp-card:nth-child(5)::before { background: var(--fuchsia); }
-.vp-card:nth-child(6)::before { background: var(--amber); }
+.vp-card:nth-child(2)::after { background: var(--fuchsia); box-shadow: 0 0 10px rgba(255,61,139,0.3); }
+.vp-card:nth-child(3)::after { background: var(--amber); box-shadow: 0 0 10px rgba(255,176,58,0.3); }
+.vp-card:nth-child(4)::after { background: var(--jade); box-shadow: 0 0 10px rgba(125,255,232,0.3); }
+.vp-card:nth-child(5)::after { background: var(--fuchsia); box-shadow: 0 0 10px rgba(255,61,139,0.3); }
+.vp-card:nth-child(6)::after { display: none; }
+
+/* Small connecting dots between the main dots */
+.vp-card::before {
+  content: '· · ·';
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 0.4em;
+  color: rgba(203,185,186,0.2);
+  margin-bottom: 1.2rem;
+}
+
+.vp-card:first-child::before { display: none; }
 
 .vp-card-inner {
   background: #000;
