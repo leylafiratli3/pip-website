@@ -1955,7 +1955,7 @@ body {
 
 .vp-hero {
   background: var(--ink);
-  padding: 10rem 2rem 5rem;
+  padding: 10rem 2rem 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1969,9 +1969,8 @@ body {
   animation: float-item 6s ease-in-out infinite;
 }
 
-.vp-star--1 { top: 25%; left: 20%; width: 50px; }
-.vp-star--2 { top: 30%; right: 18%; width: 40px; animation-delay: -2s; }
-.vp-star--3 { bottom: 25%; left: 30%; width: 35px; animation-delay: -4s; }
+.vp-star--1 { top: 35%; left: 30%; width: 40px; }
+.vp-star--2 { top: 38%; right: 28%; width: 35px; animation-delay: -2s; }
 
 .vp-hero h1 {
   font-family: var(--font-display);
