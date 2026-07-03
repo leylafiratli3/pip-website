@@ -2562,7 +2562,7 @@ body {
 
 .ct-moon {
   position: absolute;
-  top: 8%;
+  top: 18%;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
