@@ -929,7 +929,7 @@ body {
    MAILING LIST
    =========================== */
 .mailing-list {
-  background: var(--ink);
+  background: var(--bone);
   padding: 5rem 2rem;
   text-align: center;
 }
@@ -942,14 +942,14 @@ body {
 .mailing-list h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--bone);
+  color: var(--ink);
   margin-bottom: 1rem;
 }
 
 .mailing-list p {
   font-family: var(--font-display);
   font-size: 1.05rem;
-  color: var(--bone-dim);
+  color: var(--ink-2);
   margin-bottom: 2rem;
   line-height: 1.7;
 }
@@ -965,10 +965,10 @@ body {
   flex: 1;
   min-width: 250px;
   padding: 0.9rem 1.2rem;
-  border: 1.5px solid rgba(203,185,186,0.2);
+  border: 1.5px solid rgba(45,5,115,0.2);
   border-radius: 999px;
-  background: rgba(255,255,255,0.05);
-  color: var(--bone);
+  background: rgba(255,255,255,0.6);
+  color: var(--ink);
   font-family: var(--font-display);
   font-size: 0.95rem;
   outline: none;
@@ -976,11 +976,12 @@ body {
 }
 
 .mailing-form input::placeholder {
-  color: var(--bone-dim);
+  color: var(--ink-2);
+  opacity: 0.5;
 }
 
 .mailing-form input:focus {
-  border-color: var(--jade);
+  border-color: var(--fuchsia);
 }
 
 /* ===========================
