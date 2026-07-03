@@ -2553,14 +2553,31 @@ body {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 2.5rem;
-  align-items: center;
+  align-items: end;
+}
+
+.ct-photo-wrap {
+  position: relative;
+}
+
+.ct-moon {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  z-index: 2;
+  filter: drop-shadow(0 0 15px rgba(125,255,232,0.15));
+  animation: float-item 8s ease-in-out infinite;
 }
 
 .ct-photo {
-  width: 280px;
+  width: 340px;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 12px 30px rgba(0,0,0,0.3));
+  position: relative;
+  z-index: 1;
 }
 
 .ct-left h1 {
@@ -2697,6 +2714,7 @@ a.ct-detail-item:hover {
   .ct-left { padding: 7rem 2rem 3rem; text-align: center; }
   .ct-left-inner { max-width: 100%; }
   .ct-left-grid { grid-template-columns: 1fr; justify-items: center; gap: 1.5rem; }
-  .ct-photo { width: 200px; }
+  .ct-photo { width: 240px; }
+  .ct-moon { width: 70px; }
   .ct-right { padding: 3rem 2rem 4rem; }
 }
