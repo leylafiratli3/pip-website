@@ -1675,7 +1675,7 @@ body {
 .about-story {
   background: var(--bone);
   color: var(--ink);
-  padding: 6rem 2rem;
+  padding: 10rem 2rem 6rem;
 }
 
 .about-story-grid {
