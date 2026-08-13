@@ -2859,3 +2859,130 @@ a.ct-detail-item:hover {
   .ct-moon { width: 70px; }
   .ct-right { padding: 3rem 2rem 4rem; }
 }
+
+/* ===========================
+   VIDEO BANDS  (new footage)
+   =========================== */
+.video-band {
+  position: relative;
+  padding: 5rem 2rem;
+}
+.video-band--ink2 { background: var(--ink-2); }
+
+.video-band-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.video-band-head {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+.video-band-head .eyebrow { margin-bottom: 0.6rem; }
+.video-band-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  line-height: 1.1;
+  color: var(--bone);
+}
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 4px solid var(--jade);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+  background-color: var(--ink-2);
+  background-size: cover;
+  background-position: center;
+  transform: rotate(-1.2deg);
+}
+.video-frame--fuchsia { border-color: var(--fuchsia); transform: rotate(1.2deg); }
+.video-frame--amber   { border-color: var(--amber);   transform: rotate(-1deg); }
+
+.video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-caption {
+  position: absolute;
+  left: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.4vw, 1.35rem);
+  color: var(--ink);
+  background: var(--jade);
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  transform: rotate(-3deg);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.video-frame--fuchsia + .video-caption,
+.video-caption--fuchsia { background: var(--fuchsia); color: var(--bone); }
+.video-caption--amber   { background: var(--amber);   color: var(--ink); }
+
+/* Decorative stars flanking a band */
+.video-band .pq-star { position: absolute; z-index: 1; }
+
+/* Play affordance for reduced-motion / manual playback */
+.video-frame video[controls] { background: #000; }
+
+@media (max-width: 768px) {
+  .video-band { padding: 3.2rem 1.2rem; }
+  .video-frame,
+  .video-frame--fuchsia,
+  .video-frame--amber { transform: none; border-width: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-frame,
+  .video-frame--fuchsia,
+  .video-frame--amber { transform: none; }
+}
+
+/* Practice-page video sits inside the narrow reading column */
+.practice-video { margin-top: 3rem; }
+
+/* Two-up video gallery (home showcase) */
+.video-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+@media (max-width: 768px) {
+  .video-gallery { grid-template-columns: 1fr; gap: 1.2rem; }
+}
+
+/* Light photo break — full-width bone band, image held at native size (no blur) */
+.photo-break {
+  background: var(--bone);
+  padding: 4.5rem 2rem;
+}
+.photo-break img {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 18px;
+  box-shadow: 0 22px 60px rgba(0,0,0,0.35);
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s;
+}
+.photo-break img:hover { transform: rotate(0deg); }
+
+/* Light (bone) video band — used as an "exhale" beat between dark sections */
+.video-band--bone { background: var(--bone); }
+.video-band--bone .video-band-head h2 { color: var(--ink); }
+.video-band--bone .video-band-head .eyebrow { color: var(--ink-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-break img { transform: none; }
+}
+
+/* Values hero → light, so it alternates with the dark timeline below it */
+.vp-hero { background: var(--bone); }
+.vp-hero h1 { color: var(--ink); }
+.vp-hero p  { color: var(--ink-2); }

@@ -118,3 +118,39 @@ document.querySelectorAll('.pull-quote blockquote').forEach(el => {
 document.querySelectorAll('.offer-card').forEach(el => {
   revealObserver.observe(el);
 });
+
+// ========== LAZY VIDEOS ==========
+// Videos carry no src until they scroll near the viewport, so the page paints
+// its poster frame instantly and only fetches the (heavier) video bytes when
+// they're actually about to be seen. Autoplay is muted + inline; reduced-motion
+// users get a paused video with controls instead.
+const lazyVideos = document.querySelectorAll('video.lazy-video');
+if (lazyVideos.length) {
+  const loadVideo = (video) => {
+    if (video.dataset.loaded) return;
+    video.dataset.loaded = 'true';
+    video.querySelectorAll('source[data-src]').forEach(source => {
+      source.src = source.dataset.src;
+    });
+    video.load();
+
+    if (prefersReducedMotion) {
+      video.controls = true;           // let them choose to play
+    } else if (video.hasAttribute('data-autoplay')) {
+      video.play().catch(() => {        // autoplay blocked → offer controls
+        video.controls = true;
+      });
+    }
+  };
+
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadVideo(entry.target);
+        videoObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '300px 0px' });
+
+  lazyVideos.forEach(v => videoObserver.observe(v));
+}

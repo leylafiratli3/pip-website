@@ -27,3 +27,15 @@ Client website for Pip Raine's breathwork business. Static HTML/CSS/JS site.
 - Fullscreen menu overlay
 - Social icons in header AND footer
 - "Unapologetically Being" tagline vibe
+
+## Aesthetic (do not drift from this)
+Maximalist, dark, high-contrast, **multiple** poppy accents. Layered/collage feel:
+film grain, gradient-mesh blobs, marquee tickers, oversized italic serif,
+alternating dark/light sections that mirror inhale/exhale.
+Explicitly avoid the AI defaults: single accent on black, cream + terracotta,
+broadsheet/hairline layouts.
+
+## Quality floor (non-negotiable)
+Responsive to mobile (hamburger nav), visible keyboard focus, `prefers-reduced-motion`
+respected everywhere, semantic HTML, alt text. Scroll reveals via IntersectionObserver,
+no scroll libraries. Placeholder photos = gradient blocks tagged "your photo here."
