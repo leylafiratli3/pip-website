@@ -2986,3 +2986,13 @@ a.ct-detail-item:hover {
 .vp-hero { background: var(--bone); }
 .vp-hero h1 { color: var(--ink); }
 .vp-hero p  { color: var(--ink-2); }
+
+/* Titles above the home video clips — kicker + headline hierarchy */
+.video-band-head .eyebrow {
+  margin-bottom: 0.6rem;
+}
+.video-band-head h2 {
+  margin: 0 auto;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  letter-spacing: -0.01em;
+}
