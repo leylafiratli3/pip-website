@@ -53,27 +53,31 @@
       <h1 class="reveal">Free Guided Practice</h1>
       <p class="practice-sub reveal">Find a quiet spot. Let your shoulders drop. Press play when you're ready.</p>
 
-      <!-- Audio/Video player -->
+      <!-- Audio player -->
       <div class="practice-player reveal">
         <audio controls preload="none" class="practice-audio">
-          <source src="audio/practice.mp3" type="audio/mpeg">
+          <source src="audio/free-practice.mp4" type="audio/mp4">
           Your browser does not support the audio element.
         </audio>
-        <p class="practice-note">Drop a file into <code>audio/practice.mp3</code> to activate the player.</p>
+        <p class="practice-credit">Music credit ~ <em>On the Nature of Daylight</em>, Max Richter</p>
       </div>
 
       <p class="practice-after reveal">When you're done, take a moment. There's no rush to go anywhere.</p>
-
-      <div class="video-frame video-frame--amber practice-video reveal">
-        <video class="lazy-video" data-autoplay muted loop playsinline preload="none"
-               poster="assets/video/posters/practice-pond.jpg"
-               aria-label="Pip's feet resting over the still water of a pond on a sunny day">
-          <source data-src="assets/video/practice-pond.mp4" type="video/mp4">
-        </video>
-        <span class="video-caption video-caption--amber">near water · nowhere to be</span>
-      </div>
     </div>
 
+  </section>
+
+  <!-- ========== MAILING LIST ========== -->
+  <section class="mailing-list">
+    <div class="mailing-inner">
+      <h2>Stay in the loop</h2>
+      <p>Sign up to stay in touch with me and receive bits of practices and thoughts in your&nbsp;inbox.</p>
+      <form class="mailing-form" novalidate>
+        <input type="email" name="EMAIL" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+        <button type="submit" class="btn btn--jade">Subscribe</button>
+        <p class="mailing-status" role="status" aria-live="polite" hidden></p>
+      </form>
+    </div>
   </section>
 
   <footer class="site-footer">

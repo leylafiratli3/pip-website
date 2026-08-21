@@ -114,10 +114,11 @@
   <section class="mailing-list">
     <div class="mailing-inner">
       <h2>Stay in the loop</h2>
-      <p>News of upcoming sessions and the odd breathwork tip from me.</p>
-      <form class="mailing-form" action="#" method="post">
-        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+      <p>Sign up to stay in touch with me and receive bits of practices and thoughts in your&nbsp;inbox.</p>
+      <form class="mailing-form" novalidate>
+        <input type="email" name="EMAIL" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
         <button type="submit" class="btn btn--jade">Subscribe</button>
+        <p class="mailing-status" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </section>
