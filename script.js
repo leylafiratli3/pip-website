@@ -119,6 +119,103 @@ document.querySelectorAll('.offer-card').forEach(el => {
   revealObserver.observe(el);
 });
 
+// ========== MAILING LIST (Mailchimp) ==========
+// Signups post straight into Pip's Mailchimp audience — no backend, no API key.
+// Fill in the three values below from Pip's Mailchimp embedded-form URL, which
+// looks like:
+//   https://pipraine.us21.list-manage.com/subscribe/post?u=abc123...&id=def456...
+//                        ^^^^ server           ^^^^^^^^ u        ^^^^^^^^ id
+// (Audience > Signup forms > Embedded forms — copy the value from the <form action="...">.)
+const MAILCHIMP = {
+  server: 'us16',                        // datacenter prefix
+  u:      '6768e6d12a87a1a76c4885f96',   // the u= value from the form URL
+  id:     '763a28479c',                  // the id= value from the form URL
+};
+
+const mailchimpConfigured =
+  !/REPLACE_WITH/.test(MAILCHIMP.server + MAILCHIMP.u + MAILCHIMP.id);
+
+// Mailchimp's embedded form supports a JSONP endpoint so we can submit without
+// leaving the page. Load its response via a <script> tag and a one-shot callback.
+function mailchimpJsonp(url, callback) {
+  const cbName = 'mc_cb_' + Date.now();
+  const script = document.createElement('script');
+  const cleanup = () => {
+    delete window[cbName];
+    script.remove();
+  };
+  window[cbName] = (data) => { cleanup(); callback(null, data); };
+  script.onerror = () => { cleanup(); callback(new Error('network')); };
+  script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'c=' + cbName;
+  document.body.appendChild(script);
+}
+
+function setMailingStatus(statusEl, message, kind) {
+  if (!statusEl) return;
+  statusEl.textContent = message;              // textContent = no HTML injection
+  statusEl.classList.remove('is-success', 'is-error');
+  if (kind) statusEl.classList.add('is-' + kind);
+  statusEl.hidden = false;
+}
+
+document.querySelectorAll('.mailing-form').forEach((form) => {
+  const input = form.querySelector('input[type="email"]');
+  const button = form.querySelector('button');
+  const statusEl = form.querySelector('.mailing-status');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = (input.value || '').trim();
+    if (!email || !input.checkValidity()) {
+      setMailingStatus(statusEl, 'Please enter a valid email address.', 'error');
+      input.focus();
+      return;
+    }
+
+    if (!mailchimpConfigured) {
+      setMailingStatus(statusEl,
+        'Signup isn’t connected yet — please check back soon.', 'error');
+      return;
+    }
+
+    button.disabled = true;
+    setMailingStatus(statusEl, 'Subscribing…', null);
+
+    // Build the request. `b_<u>_<id>` is Mailchimp's honeypot: bots fill it,
+    // humans leave it blank, so we always send it empty.
+    const params = new URLSearchParams({ u: MAILCHIMP.u, id: MAILCHIMP.id, EMAIL: email });
+    params.append('b_' + MAILCHIMP.u + '_' + MAILCHIMP.id, '');
+    const url = 'https://' + MAILCHIMP.server +
+      '.list-manage.com/subscribe/post-json?' + params.toString();
+
+    mailchimpJsonp(url, (err, data) => {
+      button.disabled = false;
+
+      if (err || !data) {
+        setMailingStatus(statusEl,
+          'Something went wrong — please try again in a moment.', 'error');
+        return;
+      }
+
+      if (data.result === 'success') {
+        form.reset();
+        setMailingStatus(statusEl,
+          'You’re on the list — thank you! ✨', 'success');
+        return;
+      }
+
+      // Error path: Mailchimp returns an HTML-ish message. Strip tags and show
+      // a friendlier line for the common "already subscribed" case.
+      const raw = (data.msg || '').replace(/<[^>]*>/g, '');
+      const msg = /already subscribed/i.test(raw)
+        ? 'You’re already on the list — thank you!'
+        : (raw || 'Sorry, we couldn’t subscribe that address.');
+      setMailingStatus(statusEl, msg, 'error');
+    });
+  });
+});
+
 // ========== LAZY VIDEOS ==========
 // Videos carry no src until they scroll near the viewport, so the page paints
 // its poster frame instantly and only fetches the (heavier) video bytes when

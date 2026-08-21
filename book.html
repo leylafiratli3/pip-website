@@ -72,7 +72,7 @@
           <img src="assets/3.png" alt="Dolphin icon">
         </div>
         <h3>Group Breathwork</h3>
-        <p class="book-card-desc">Collective sessions for shared regulation and community healing. Something shifts when we breathe together. Strangers become witnesses.</p>
+        <p class="book-card-desc">Collective sessions for shared grounding, connection and community healing.</p>
         <div class="book-card-meta">
           <span>90 min</span>
           <span>In-Person & Virtual</span>
@@ -95,32 +95,46 @@
     </div>
   </section>
 
-  <!-- ========== VIDEO BAND ========== -->
-  <section class="video-band video-band--bone reveal">
-    <div class="video-band-inner">
-      <div class="video-band-head">
-        <p class="eyebrow">A glimpse inside</p>
-        <h2>Something shifts when we breathe together</h2>
-      </div>
-      <div class="video-frame video-frame--fuchsia">
-        <video class="lazy-video" data-autoplay muted loop playsinline preload="none"
-               poster="assets/video/posters/book-circle.jpg"
-               aria-label="A small group sitting in a circle during one of Pip's breathwork sessions">
-          <source data-src="assets/video/book-circle.mp4" type="video/mp4">
-        </video>
-        <span class="video-caption video-caption--fuchsia">strangers become witnesses</span>
-      </div>
-    </div>
-  </section>
-
   <!-- ========== SCHEDULER ========== -->
   <section class="book-scheduler" id="scheduler">
     <div class="book-scheduler-inner">
       <h2>Choose a Time</h2>
-      <div class="scheduler-placeholder">
-        <p>Scheduling widget coming soon</p>
-        <p class="scheduler-note">In the meantime, <a href="contact.html">get in touch</a> to arrange your session.</p>
+      <!-- Calendly inline widget -->
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/pipraine-t2xo"
+           style="min-width:320px;height:760px;"></div>
+      <noscript>
+        <p class="scheduler-note">To book a session, please <a href="contact.html">get in touch</a>.</p>
+      </noscript>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT PIP ========== -->
+  <section class="about-me about-me--book reveal">
+    <div class="about-me-grid">
+      <div class="about-me-images">
+        <img src="assets/pip-jumpsuit.jpg" alt="Pip Raine standing by a pond in a bright red patterned jumpsuit" class="about-me-img">
       </div>
+      <div class="about-me-text">
+        <p>As I remember, I have always been a curious deep soul with a fun side — and my journey of late has been a return and a remembrance.</p>
+        <p>Through this work I found the agency and freedom to breathe, move and voice as my full self.</p>
+        <p class="highlight">And I want this for you too!</p>
+        <p>We were never meant to do this work alone! And being witnessed from a non-judgmental space, our nervous system senses this and gradually starts to return to its natural rhythm.</p>
+        <a href="about.html" class="btn btn--jade">Read my full story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAILING LIST ========== -->
+  <section class="mailing-list mailing-list--dark">
+    <div class="mailing-inner">
+      <h2>Stay in the loop</h2>
+      <p>Sign up to stay in touch with me and receive bits of practices and thoughts in your&nbsp;inbox.</p>
+      <form class="mailing-form" novalidate>
+        <input type="email" name="EMAIL" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+        <button type="submit" class="btn btn--jade">Subscribe</button>
+        <p class="mailing-status" role="status" aria-live="polite" hidden></p>
+      </form>
     </div>
   </section>
 
@@ -144,5 +158,8 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Calendly embed script -->
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
