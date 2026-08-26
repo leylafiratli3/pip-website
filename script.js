@@ -216,6 +216,55 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
   });
 });
 
+// ========== CONTACT FORM (Formspree) ==========
+// AJAX submit so visitors stay on the page and see an inline confirmation
+// instead of a redirect. Reuses setMailingStatus() for consistent styling.
+document.querySelectorAll('.ct-form').forEach((form) => {
+  const button = form.querySelector('button[type="submit"]');
+  const statusEl = form.querySelector('.mailing-status');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Let the browser flag missing/invalid required fields first.
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    button.disabled = true;
+    setMailingStatus(statusEl, 'Sending…', null);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' },
+    })
+      .then((res) => res.json().then((data) => ({ ok: res.ok, data })))
+      .then(({ ok, data }) => {
+        button.disabled = false;
+
+        if (ok) {
+          form.reset();
+          setMailingStatus(statusEl,
+            'Thank you — your note is on its way. I’ll be in touch soon. ✨', 'success');
+          return;
+        }
+
+        // Formspree returns { errors: [{ message }] } on failure.
+        const msg = data && data.errors && data.errors.length
+          ? data.errors.map((err) => err.message).join(' ')
+          : 'Something went wrong — please try again in a moment.';
+        setMailingStatus(statusEl, msg, 'error');
+      })
+      .catch(() => {
+        button.disabled = false;
+        setMailingStatus(statusEl,
+          'Something went wrong — please try again in a moment.', 'error');
+      });
+  });
+});
+
 // ========== LAZY VIDEOS ==========
 // Videos carry no src until they scroll near the viewport, so the page paints
 // its poster frame instantly and only fetches the (heavier) video bytes when

@@ -374,7 +374,10 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s;
-  z-index: 150;
+  /* Lives as a direct child of <body> (not inside .site-header) so it can rise
+     above the page content. Sits above the header (100); the toggle/close
+     button (400) sits above this. */
+  z-index: 300;
 }
 
 .nav-overlay.open { opacity: 1; pointer-events: auto; }
@@ -854,6 +857,89 @@ body {
 }
 
 /* ===========================
+   TESTIMONIALS
+   Deep-purple "inhale" beat between the black offerings and the
+   bone-light video band below it. Per-card poppy accents echo the
+   offering cards; oversized italic serif for the quotes.
+   =========================== */
+.testimonials {
+  background: radial-gradient(120% 130% at 50% 0%, var(--ink) 0%, var(--ink-2) 72%);
+  padding: 6rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonials h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  color: var(--bone);
+  margin-bottom: 3rem;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  text-align: left;
+}
+
+.testimonial-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(203, 185, 186, 0.14);
+  border-radius: 22px;
+  padding: 2.6rem 2.2rem 2.2rem;
+  /* opacity included so the .reveal fade-in still transitions (this rule
+     overrides .reveal's own transition list). */
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+.testimonial-card:hover { transform: translateY(-6px); }
+
+.testimonial-card blockquote {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--bone);
+}
+
+.testimonial-card figcaption {
+  margin-top: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Per-card accents */
+.testimonial-card--1 figcaption { color: var(--fuchsia); }
+.testimonial-card--1:hover {
+  border-color: var(--fuchsia);
+  box-shadow: 0 0 40px rgba(255, 61, 139, 0.18);
+}
+
+.testimonial-card--2 figcaption { color: var(--jade); }
+.testimonial-card--2:hover {
+  border-color: var(--jade);
+  box-shadow: 0 0 40px rgba(125, 255, 232, 0.18);
+}
+
+@media (max-width: 768px) {
+  .testimonials { padding: 4.5rem 1.5rem; }
+  .testimonial-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .testimonial-mark { font-size: 4.5rem; }
+}
+
+/* ===========================
    MORE ABOUT ME
    =========================== */
 .about-me {
@@ -947,10 +1033,25 @@ body {
   max-width: 800px;
   margin: 0 auto 2.5rem;
   color: var(--bone);
+  /* Sit above the decorative stars so the copy stays readable. */
+  position: relative;
+  z-index: 2;
 }
 
 .pull-quote .btn {
   display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  /* On narrow screens the corner stars crowd the centered heading, so tuck
+     them tight into the corners (and shrink them) to frame the CTA instead. */
+  .pull-quote { padding: 5rem 1.5rem; }
+  .pull-quote .pq-star--1 { top: 2%;    left: 3%;  width: 40px; }
+  .pull-quote .pq-star--2 { top: 2%;    right: 3%; width: 34px; }
+  .pull-quote .pq-star--3 { bottom: 3%; left: 4%;  width: 28px; }
+  .pull-quote .pq-star--4 { bottom: 3%; right: 4%; width: 38px; }
 }
 
 /* ===========================
@@ -1117,12 +1218,16 @@ body {
     position: fixed;
     top: 1.5rem;
     right: 1.5rem;
-    z-index: 200;
+    /* Above the overlay (300) so it doubles as the close (X) button. */
+    z-index: 400;
   }
 
   .hero { padding: 7rem 1.5rem 3rem; }
   .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-collage { height: 420px; margin: 0 auto; max-width: 380px; }
+  /* All collage children are position:absolute, so without an explicit width
+     the container collapses to 0 and the global img{max-width:100%} reset then
+     shrinks the photo to a sliver. Pin the width so the photo has room. */
+  .hero-collage { height: 420px; margin: 0 auto; width: 300px; max-width: 100%; }
   .collage-main { width: 280px; height: 350px; }
   .hero-anchor { position: static; width: 180px; margin: 1.5rem auto 0; display: block; }
   .collage-yinyang { width: 100px; }
@@ -2946,7 +3051,9 @@ a.ct-detail-item:hover {
 
 @media (max-width: 768px) {
   .ct-split { grid-template-columns: 1fr; }
-  .ct-left { padding: 7rem 2rem 3rem; text-align: center; }
+  /* Extra top padding so the moon (which overhangs above the photo) clears
+     the fixed header instead of tucking behind it. */
+  .ct-left { padding: 10rem 2rem 3rem; text-align: center; }
   .ct-left-inner { max-width: 100%; }
   .ct-left-grid { grid-template-columns: 1fr; justify-items: center; gap: 1.5rem; }
   .ct-photo { width: 240px; }
