@@ -1,0 +1,43 @@
+# Netlify configuration for Pip Raine breathwork site
+# Static HTML/CSS/JS — no build step required.
+
+[build]
+  publish = "."
+  command = ""
+
+# Serve pretty URLs: /about instead of /about.html
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/book"
+  to = "/book.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/practice"
+  to = "/practice.html"
+  status = 200
+
+[[redirects]]
+  from = "/values"
+  to = "/values.html"
+  status = 200
+
+# Long-cache static assets (images, audio, video, css, js)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
