@@ -886,7 +886,7 @@ body {
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   text-align: left;
 }
@@ -933,10 +933,20 @@ body {
   box-shadow: 0 0 40px rgba(125, 255, 232, 0.18);
 }
 
+.testimonial-card--3 figcaption { color: var(--amber); }
+.testimonial-card--3:hover {
+  border-color: var(--amber);
+  box-shadow: 0 0 40px rgba(255, 176, 58, 0.18);
+}
+
 @media (max-width: 768px) {
   .testimonials { padding: 4.5rem 1.5rem; }
   .testimonial-grid { grid-template-columns: 1fr; gap: 1.6rem; }
   .testimonial-mark { font-size: 4.5rem; }
+  /* Stacked cards make the section tall on mobile, so the corner stars would
+     land over the quotes — tuck them tight into the corners to frame instead. */
+  .testimonials .pq-star--1 { top: 1.5%;    left: 2%;  width: 34px; }
+  .testimonials .pq-star--4 { bottom: 1.5%; right: 2%; width: 32px; }
 }
 
 /* ===========================
