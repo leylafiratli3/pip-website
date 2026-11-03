@@ -40,5 +40,11 @@ Save, reload the site, and a real signup should appear as a contact in
   that off in Audience settings if you want instant single opt-in.
 - Until the three values are filled in, the form shows a friendly
   "Signup isn't connected yet" message instead of erroring.
+- The form also sends a **first name** as `FNAME` (Mailchimp's default
+  first-name field), so emails can use the `*|FNAME|*` merge tag.
+- If **reCAPTCHA** is enabled on the audience's form settings, Mailchimp refuses
+  the in-page signup with `msg: "captcha"`. The form then sends the visitor to
+  Mailchimp's hosted page to tick the captcha. Turning reCAPTCHA off (and using
+  double opt-in instead) keeps visitors on the site.
 - The separate "Send a note" contact form on `contact.html` is **not** wired to
   anything yet — that's a message/enquiry form, not a mailing-list signup.

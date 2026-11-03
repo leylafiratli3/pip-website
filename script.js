@@ -158,13 +158,40 @@ function setMailingStatus(statusEl, message, kind) {
   statusEl.hidden = false;
 }
 
+// If Pip has reCAPTCHA switched on in Mailchimp, the background (JSONP) signup
+// is refused with msg "captcha". Fall back to a normal POST to Mailchimp's
+// hosted page, which shows the captcha and then confirms the signup.
+function mailchimpHostedSubmit(fields) {
+  const fallback = document.createElement('form');
+  fallback.method = 'post';
+  fallback.action = 'https://' + MAILCHIMP.server +
+    '.list-manage.com/subscribe/post?u=' + MAILCHIMP.u + '&id=' + MAILCHIMP.id;
+  Object.entries(fields).forEach(([name, value]) => {
+    const field = document.createElement('input');
+    field.type = 'hidden';
+    field.name = name;
+    field.value = value;
+    fallback.appendChild(field);
+  });
+  document.body.appendChild(fallback);
+  fallback.submit();
+}
+
 document.querySelectorAll('.mailing-form').forEach((form) => {
+  const nameInput = form.querySelector('input[name="FNAME"]');
   const input = form.querySelector('input[type="email"]');
   const button = form.querySelector('button');
   const statusEl = form.querySelector('.mailing-status');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    const firstName = (nameInput ? nameInput.value : '').trim();
+    if (nameInput && !firstName) {
+      setMailingStatus(statusEl, 'Please enter your first name.', 'error');
+      nameInput.focus();
+      return;
+    }
 
     const email = (input.value || '').trim();
     if (!email || !input.checkValidity()) {
@@ -184,7 +211,9 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
 
     // Build the request. `b_<u>_<id>` is Mailchimp's honeypot: bots fill it,
     // humans leave it blank, so we always send it empty.
-    const params = new URLSearchParams({ u: MAILCHIMP.u, id: MAILCHIMP.id, EMAIL: email });
+    const params = new URLSearchParams({
+      u: MAILCHIMP.u, id: MAILCHIMP.id, EMAIL: email, FNAME: firstName,
+    });
     params.append('b_' + MAILCHIMP.u + '_' + MAILCHIMP.id, '');
     const url = 'https://' + MAILCHIMP.server +
       '.list-manage.com/subscribe/post-json?' + params.toString();
@@ -201,7 +230,14 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
       if (data.result === 'success') {
         form.reset();
         setMailingStatus(statusEl,
-          'You’re on the list — thank you! ✨', 'success');
+          'Thank you, ' + firstName + '! Keep an eye on your inbox ✨', 'success');
+        return;
+      }
+
+      if (/captcha/i.test(data.msg || '')) {
+        setMailingStatus(statusEl,
+          'Taking you to a quick “I’m not a robot” check…', null);
+        mailchimpHostedSubmit({ EMAIL: email, FNAME: firstName });
         return;
       }
 

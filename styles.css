@@ -1127,6 +1127,12 @@ body {
   transition: border-color 0.3s;
 }
 
+/* First name is short — let it take less room than the email field. */
+.mailing-form input[name="FNAME"] {
+  flex: 0.6;
+  min-width: 160px;
+}
+
 .mailing-form input::placeholder {
   color: var(--ink-2);
   opacity: 0.5;
