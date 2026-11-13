@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260826">
+  <link rel="stylesheet" href="styles.css?v=20261113">
 </head>
 <body>
 
@@ -21,6 +21,19 @@
         <a href="about.html">About</a>
         <a href="values.html">Values</a>
         <a href="book.html">Book</a>
+        <div class="nav-dropdown">
+          <a href="course.html">Course</a>
+          <div class="nav-dropdown-panel">
+            <a href="course.html" class="nav-dd-card">
+              <img src="assets/course-death-of-the-people-pleaser.jpg" alt="" width="84" height="84" loading="lazy">
+              <span class="nav-dd-text">
+                <span class="nav-dd-eyebrow">5-week online course</span>
+                <span class="nav-dd-title">Death of the People Pleaser</span>
+                <span class="nav-dd-meta">Mondays on Zoom &middot; from 11 Jan 2027</span>
+              </span>
+            </a>
+          </div>
+        </div>
         <a href="practice.html">Free Practice</a>
         <a href="contact.html">Contact</a>
         <a href="https://pipraine.substack.com/" target="_blank" rel="noopener">Blog</a>
@@ -38,6 +51,7 @@
         <li><a href="about.html">About</a></li>
         <li><a href="values.html">Values</a></li>
         <li><a href="book.html">Book</a></li>
+        <li><a href="course.html">Course</a></li>
         <li><a href="practice.html">Free Practice</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="https://pipraine.substack.com/" target="_blank" rel="noopener">Blog</a></li>
@@ -56,32 +70,38 @@
       <h1 class="reveal">Free Guided Practice</h1>
       <p class="practice-sub reveal">Find a quiet spot. Let your shoulders drop. Press play when you're ready.</p>
 
-      <!-- Audio player -->
-      <div class="practice-player reveal">
-        <audio controls preload="none" class="practice-audio">
-          <source src="audio/free-practice.mp4" type="audio/mp4">
-          Your browser does not support the audio element.
-        </audio>
-        <p class="practice-credit">Music credit ~ <em>On the Nature of Daylight</em>, Max Richter</p>
+      <!-- Gate: name + email unlocks the audio (and joins the mailing list) -->
+      <div class="practice-gate reveal" id="practice-gate">
+        <p class="practice-gate-lede">Pop your name and email below and the practice is yours. You&rsquo;ll also receive bits of practices and thoughts from me in your&nbsp;inbox.</p>
+        <form class="mailing-form practice-gate-form" data-unlocks="practice" novalidate>
+          <input type="text" name="FNAME" placeholder="Your first name" required aria-label="First name" autocomplete="given-name">
+          <input type="email" name="EMAIL" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+          <button type="submit" class="btn btn--jade">Unlock the practice</button>
+          <p class="mailing-status" role="status" aria-live="polite" hidden></p>
+        </form>
+        <p class="practice-gate-small">Unsubscribe any time with one click.</p>
       </div>
 
-      <p class="practice-after reveal">When you're done, take a moment. There's no rush to go anywhere.</p>
+      <!-- Unlocked: shown once signed up (remembered in this browser) -->
+      <div class="practice-unlocked" id="practice-unlocked" hidden>
+        <p class="practice-welcome" tabindex="-1">Here&rsquo;s your practice &#10024;</p>
+
+        <!-- Audio player -->
+        <div class="practice-player">
+          <audio controls preload="none" class="practice-audio">
+            <source src="audio/free-practice.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+          </audio>
+          <p class="practice-credit">Music credit ~ <em>On the Nature of Daylight</em>, Max Richter</p>
+        </div>
+
+        <p class="practice-after">When you're done, take a moment. There's no rush to go anywhere.</p>
+      </div>
+
+      <!-- Without JavaScript the signup can't run, so just show the audio. -->
+      <noscript><style>.practice-gate { display: none; } .practice-unlocked[hidden] { display: block; }</style></noscript>
     </div>
 
-  </section>
-
-  <!-- ========== MAILING LIST ========== -->
-  <section class="mailing-list">
-    <div class="mailing-inner">
-      <h2>Stay in the loop</h2>
-      <p>Sign up to stay in touch with me and receive bits of practices and thoughts in your&nbsp;inbox.</p>
-      <form class="mailing-form" novalidate>
-        <input type="text" name="FNAME" placeholder="Your first name" required aria-label="First name" autocomplete="given-name">
-        <input type="email" name="EMAIL" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
-        <button type="submit" class="btn btn--jade">Subscribe</button>
-        <p class="mailing-status" role="status" aria-live="polite" hidden></p>
-      </form>
-    </div>
   </section>
 
   <footer class="site-footer">
@@ -92,6 +112,7 @@
         <a href="about.html">About</a>
         <a href="values.html">Values</a>
         <a href="book.html">Book</a>
+        <a href="course.html">Course</a>
         <a href="practice.html">Free Practice</a>
         <a href="contact.html">Contact</a>
         <a href="https://pipraine.substack.com/" target="_blank" rel="noopener">Blog</a>
@@ -104,6 +125,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260826"></script>
+  <script src="script.js?v=20261113"></script>
 </body>
 </html>

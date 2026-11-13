@@ -11,6 +11,13 @@
   --amber:   #ffb03a;
   --jade:    #7DFFE8;
 
+  /* "Death of the People Pleaser" artwork palette (course page + promos) */
+  --cf-blue:     #4b19dc;
+  --cf-tan:      #dcb18e;
+  --cf-lavender: #c8b9f2;
+  --cf-crow:     #2e0c49;
+  --cf-night:    #0d0720;
+
   --font-display: 'Chewy', cursive;
   --font-body:    'Hanken Grotesk', sans-serif;
   --font-mono:    'Space Mono', monospace;
@@ -340,6 +347,85 @@ body {
 .desktop-nav a:focus-visible {
   outline: 2px solid var(--amber);
   outline-offset: 4px;
+}
+
+/* "Course" dropdown: hover or keyboard focus previews the current course */
+.desktop-nav { align-items: center; }
+
+.nav-dropdown { position: relative; }
+
+.nav-dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  padding-top: 1.1rem;          /* hover bridge between link and card */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  z-index: 120;
+}
+
+.nav-dropdown:hover .nav-dropdown-panel,
+.nav-dropdown:focus-within .nav-dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.desktop-nav .nav-dd-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 330px;
+  padding: 0.9rem;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse 60% 120% at 15% 50%, rgba(75,25,220,0.45), transparent 70%),
+    var(--cf-night);
+  border: 1px solid rgba(200,185,242,0.2);
+  box-shadow: 8px 8px 0 var(--cf-blue), 0 20px 40px rgba(0,0,0,0.5);
+  letter-spacing: normal;
+}
+
+.desktop-nav .nav-dd-card::after { display: none; }
+
+.nav-dd-card img {
+  width: 84px;
+  height: 84px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.nav-dd-card:hover img { transform: scale(1.05) rotate(-2deg); }
+
+.nav-dd-text { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.nav-dd-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cf-lavender);
+}
+
+.nav-dd-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.15;
+  color: var(--cf-tan);
+}
+
+.nav-dd-meta {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  color: var(--bone-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown-panel { transition: none; transform: translate(-50%, 0); }
+  .nav-dd-card:hover img { transform: none; }
 }
 
 /* Hamburger */
@@ -2575,6 +2661,7 @@ body {
 }
 
 .practice-inner {
+  width: 100%;
   max-width: 600px;
   text-align: center;
   position: relative;
@@ -2646,6 +2733,51 @@ body {
   line-height: 1.7;
 }
 
+/* Gate: name + email unlocks the audio */
+.practice-gate {
+  background: rgba(7,3,15,0.55);
+  border: 1.5px solid rgba(125,255,232,0.35);
+  border-radius: 24px;
+  padding: 2.2rem 2rem 1.8rem;
+  box-shadow: 8px 8px 0 var(--fuchsia);
+  backdrop-filter: blur(6px);
+}
+
+.practice-gate-lede {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--bone);
+  margin-bottom: 1.6rem;
+}
+
+.practice-gate .mailing-status { color: var(--bone); }
+.practice-gate .mailing-status.is-error { color: var(--fuchsia); }
+
+.practice-gate-small {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--bone-dim);
+  opacity: 0.75;
+  margin-top: 1.1rem;
+}
+
+.practice-unlocked[hidden] { display: none; }
+
+.practice-welcome {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--jade);
+  margin-bottom: 1.5rem;
+}
+
+.practice-welcome:focus { outline: none; }
+.practice-welcome:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+}
+
 /* Floating clouds */
 .practice-cloud {
   position: absolute;
@@ -2713,7 +2845,8 @@ body {
 }
 
 @media (max-width: 768px) {
-  .practice-page { padding: 7rem 1.5rem 3rem; }
+  .practice-page { padding: 7rem 1rem 3rem; }
+  .practice-gate { padding: 1.8rem 1.2rem 1.5rem; box-shadow: 5px 5px 0 var(--fuchsia); }
   .practice-cloud--1, .practice-cloud--2 { width: 150px; }
   .practice-cloud--3, .practice-cloud--4, .practice-cloud--5 { display: none; }
 }
@@ -3264,4 +3397,725 @@ a.ct-detail-item:hover {
   .mailing-form .btn {
     width: 100%;
   }
+}
+
+/* ===========================
+   COURSE PAGE — Death of the People Pleaser
+   Dark hero → fuchsia marquee → light intro → dark weeks → light details,
+   so the page breathes in/out like the rest of the site.
+   =========================== */
+.course-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  padding: 9rem 2rem 5rem;
+}
+
+.course-hero-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.course-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jade);
+  margin-bottom: 1.2rem;
+}
+
+.course-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7.5vw, 6rem);
+  line-height: 1;
+  color: var(--bone);
+  margin-bottom: 1.5rem;
+}
+
+.course-hero h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--fuchsia);
+  text-shadow: 4px 4px 0 var(--amber);
+}
+
+.course-hero-sub {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--bone-dim);
+  max-width: 520px;
+  margin-bottom: 1.8rem;
+}
+
+.course-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.2rem;
+}
+
+.course-chips li {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(246,235,224,0.25);
+  border-radius: 999px;
+}
+
+.course-chips li:nth-child(1) { border-color: var(--jade); }
+.course-chips li:nth-child(2) { border-color: var(--amber); }
+.course-chips li:nth-child(3) { border-color: var(--fuchsia); }
+
+.course-hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Course artwork, tilted like a pinned poster, stars floating around */
+.course-hero-art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.course-star {
+  position: absolute;
+  width: 22%;
+  animation: float-item 7s ease-in-out infinite;
+}
+.course-star--1 { top: -8%;    right: -8%; }
+.course-star--2 { top: 40%;    left: -12%; width: 16%; animation-delay: -2s; }
+.course-star--3 { bottom: -8%; right: 10%; width: 16%; animation-delay: -4s; }
+
+/* Shared by the course page hero and the homepage band */
+.course-poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 4px solid var(--bone);
+  transform: rotate(2.5deg);
+  box-shadow: 10px 10px 0 var(--jade), 0 30px 60px rgba(0,0,0,0.45);
+}
+
+.marquee--fuchsia { background: var(--fuchsia); }
+.marquee--fuchsia .marquee-track span { color: var(--bone); }
+
+/* Intro — light "exhale" */
+.course-intro {
+  background: var(--bone);
+  padding: 6rem 2rem;
+}
+
+.course-intro-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.course-intro h2,
+.course-weeks h2,
+.course-details h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  margin-bottom: 1.8rem;
+}
+
+.course-intro h2 { color: var(--ink); }
+
+.course-intro p {
+  font-size: 1.12rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin-bottom: 1.3rem;
+}
+
+.course-intro-highlight {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem) !important;
+  line-height: 1.4 !important;
+  color: var(--ink) !important;
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.8rem;
+  border-left: 6px solid var(--fuchsia);
+  background: rgba(255,61,139,0.08);
+  border-radius: 0 16px 16px 0;
+}
+
+/* Weeks — dark "inhale" */
+.course-weeks {
+  background: #000;
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-weeks-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.course-weeks h2 { color: var(--bone); text-align: center; margin-bottom: 1rem; }
+
+.course-weeks-lede {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--bone-dim);
+  max-width: 600px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.7;
+}
+
+.week-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.week-card {
+  --accent: var(--jade);
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 2rem;
+  padding: 2.5rem;
+  background: var(--ink-2);
+  border: 1px solid rgba(203,185,186,0.08);
+  border-top: 5px solid var(--accent);
+  border-radius: 20px;
+}
+
+.week-card--1 { --accent: var(--jade); }
+.week-card--2 { --accent: var(--amber); }
+.week-card--3 { --accent: var(--fuchsia); }
+.week-card--4 { --accent: #b78bff; }
+.week-card--5 { --accent: var(--jade); background: linear-gradient(135deg, var(--ink-2), #3a0d5c 60%, #5c0f45); }
+
+.week-num {
+  font-family: var(--font-display);
+  font-size: 5.5rem;
+  line-height: 0.9;
+  color: var(--accent);
+}
+
+.week-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.week-body h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  line-height: 1.15;
+  color: var(--bone);
+  margin-bottom: 1rem;
+}
+
+.week-body p {
+  color: var(--bone-dim);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.week-body .week-practices-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--bone);
+  margin: 1.5rem 0 0.8rem;
+}
+
+.week-practices {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.week-practices li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--bone);
+  line-height: 1.65;
+}
+
+.week-practices li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+}
+
+.week-body .week-signoff {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-top: 1.2rem;
+}
+
+/* Details + price — light "exhale" */
+.course-details {
+  background: var(--bone);
+  padding: 6rem 2rem;
+}
+
+.course-details-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.course-details h2 { color: var(--ink); text-align: center; margin-bottom: 3rem; }
+
+.course-details-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.course-facts {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-facts div {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 2px dashed rgba(45,5,115,0.18);
+}
+
+.course-facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fuchsia);
+  padding-top: 0.25rem;
+}
+
+.course-facts dd {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.course-price {
+  position: relative;
+  background: var(--ink);
+  color: var(--bone);
+  border-radius: 24px;
+  padding: 2.8rem 2.2rem 2.4rem;
+  text-align: center;
+  box-shadow: 10px 10px 0 var(--jade);
+}
+
+.course-price-tag {
+  position: absolute;
+  top: -1.1rem;
+  right: 1.5rem;
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  transform: rotate(4deg);
+}
+
+.course-price-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--jade);
+}
+
+.course-price-amount {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 4.2rem);
+  line-height: 1.1;
+  margin: 0.4rem 0;
+}
+
+.course-price-usual {
+  color: var(--bone-dim);
+  margin-bottom: 0.4rem;
+}
+
+.course-price-note {
+  font-family: var(--font-display);
+  color: var(--bone-dim);
+  margin-bottom: 1.8rem;
+}
+
+.course-price-small {
+  font-size: 0.85rem;
+  color: var(--bone-dim);
+  margin-top: 1.2rem;
+}
+
+.course-price-small a {
+  color: var(--jade);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.course-price-small a:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-star { animation: none; }
+}
+
+@media (max-width: 860px) {
+  .course-hero { padding: 7.5rem 1rem 4rem; }
+  .course-hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .course-hero-art { max-width: 300px; order: -1; }
+  .course-hero-text { text-align: center; }
+  .course-hero-sub { margin-left: auto; margin-right: auto; }
+  .course-chips,
+  .course-hero-btns { justify-content: center; }
+
+  .course-intro,
+  .course-weeks,
+  .course-details { padding: 4.5rem 1rem; }
+
+  .week-card { grid-template-columns: 1fr; gap: 0.5rem; padding: 2rem 1.4rem; }
+  .week-num { font-size: 3.5rem; }
+
+  .course-details-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .course-facts div { grid-template-columns: 1fr; gap: 0.3rem; }
+  .course-price { box-shadow: 6px 6px 0 var(--jade); }
+}
+
+/* ---------- Course page in the artwork's muted palette ----------
+   Near-black + the artwork's blue glow, with tan and lavender as the only
+   accents, so the poster stays the loudest thing on the page. */
+.course-page .course-hero {
+  background:
+    radial-gradient(ellipse 45% 70% at 75% 55%, rgba(75,25,220,0.5), transparent 70%),
+    var(--cf-night);
+}
+.course-page .course-hero .blob { display: none; }
+.course-page .course-eyebrow { color: var(--cf-lavender); }
+.course-page .course-hero h1 em { color: var(--cf-tan); text-shadow: none; }
+.course-page .course-hero-sub { color: var(--cf-lavender); }
+.course-page .course-chips li,
+.course-page .course-chips li:nth-child(n) {
+  border-color: rgba(200,185,242,0.45);
+  color: var(--bone);
+}
+
+.course-page .btn--jade {
+  background: var(--cf-tan);
+  color: var(--cf-crow);
+}
+.course-page .btn--jade:hover { box-shadow: 0 6px 24px rgba(220,177,142,0.35); }
+.course-page .btn--ghost { border-color: rgba(200,185,242,0.5); }
+
+/* Poster: flat, glowing, no frame */
+.course-page .course-poster-img {
+  border: none;
+  transform: none;
+  box-shadow: 0 0 0 1px rgba(200,185,242,0.2), 0 30px 80px rgba(75,25,220,0.55);
+}
+
+.course-page .marquee--fuchsia { background: var(--cf-tan); }
+.course-page .marquee--fuchsia .marquee-track span { color: var(--cf-crow); }
+
+.course-page .course-intro h2,
+.course-page .course-details h2 { color: var(--cf-crow); }
+.course-page .course-intro-highlight {
+  color: var(--cf-crow) !important;
+  border-left-color: var(--cf-blue);
+  background: rgba(75,25,220,0.07);
+}
+
+.course-page .course-weeks { background: var(--cf-night); }
+.course-page .week-card {
+  background: rgba(200,185,242,0.04);
+  border-color: rgba(200,185,242,0.14);
+  border-top-color: var(--accent);
+}
+.course-page .week-card:nth-child(odd)  { --accent: var(--cf-tan); }
+.course-page .week-card:nth-child(even) { --accent: var(--cf-lavender); }
+.course-page .week-card--5 {
+  background:
+    radial-gradient(ellipse 60% 90% at 85% 50%, rgba(75,25,220,0.35), transparent 70%),
+    rgba(200,185,242,0.04);
+}
+
+.course-page .course-facts dt { color: var(--cf-blue); }
+.course-page .course-facts dd { color: var(--cf-crow); }
+.course-page .course-facts div { border-bottom-color: rgba(46,12,73,0.18); }
+
+.course-page .course-price {
+  background: var(--cf-night);
+  box-shadow: 10px 10px 0 var(--cf-blue);
+}
+.course-page .course-price-tag { background: var(--cf-tan); color: var(--cf-crow); }
+.course-page .course-price-label { color: var(--cf-lavender); }
+.course-page .course-price .btn--fuchsia { background: var(--cf-tan); color: var(--cf-crow); }
+.course-page .course-price-small a { color: var(--cf-lavender); }
+
+@media (max-width: 860px) {
+  .course-page .course-price { box-shadow: 6px 6px 0 var(--cf-blue); }
+}
+
+/* ===========================
+   HOME — COURSE FEATURE BAND
+   Light band between the black offerings and purple testimonials.
+   Collage card: ticker strip, text + week list, Pip on the moon.
+   =========================== */
+.course-feature {
+  background: var(--bone);
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cf-star {
+  position: absolute;
+  pointer-events: none;
+  animation: float-item 7s ease-in-out infinite;
+}
+.cf-star--1 { top: 6%;    left: 3%;  width: 70px; }
+.cf-star--2 { bottom: 8%; left: 8%;  width: 45px; animation-delay: -3s; }
+.cf-star--3 { top: 10%;   right: 4%; width: 55px; animation-delay: -5s; }
+
+.course-feature-card {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  background:
+    radial-gradient(ellipse 55% 75% at 78% 55%, rgba(75,25,220,0.55), transparent 70%),
+    #0d0720;
+  border-radius: 32px;
+  box-shadow: 14px 14px 0 var(--cf-blue);
+  overflow: hidden;
+}
+
+
+/* Jade ticker running along the top edge of the card */
+.cf-ticker {
+  position: relative;
+  z-index: 3;
+  background: var(--cf-tan);
+  padding: 0.7rem 0;
+  overflow: hidden;
+}
+
+.cf-ticker-track {
+  display: flex;
+  gap: 1.8rem;
+  width: max-content;
+  animation: scroll-marquee 26s linear infinite;
+}
+
+.cf-ticker-track span {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cf-crow);
+  white-space: nowrap;
+}
+
+.course-feature-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 3.5rem 3.5rem 3.8rem;
+}
+
+.course-feature .course-feature-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cf-lavender);
+  background: transparent;
+  border: 1px solid var(--cf-lavender);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 1.3rem;
+}
+
+.course-feature h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  line-height: 1;
+  color: var(--bone);
+  margin-bottom: 1.2rem;
+}
+
+.course-feature h2 em {
+  display: block;
+  font-style: normal;
+  color: var(--cf-tan);
+}
+
+.course-feature-sub {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--bone-dim);
+  max-width: 500px;
+  margin-bottom: 1.6rem;
+}
+
+/* The five week titles as numbered pills */
+.cf-weeks {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.6rem;
+}
+
+.cf-weeks li {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--bone);
+  padding: 0.35rem 0.9rem 0.35rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(200,185,242,0.06);
+  border: 1px solid rgba(200,185,242,0.18);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cf-weeks li span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--cf-crow);
+  background: var(--cf-lavender);
+  border-radius: 999px;
+  padding: 0.2rem 0.45rem;
+}
+
+.course-feature-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cf-lavender);
+  margin-bottom: 1.8rem;
+}
+
+.course-feature-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Course artwork (links through to the course page) */
+.course-feature-art {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 20px;
+  transition: transform 0.3s;
+}
+
+.course-feature-art:hover { transform: translateY(-4px); }
+
+/* Here the artwork sits flat and glows instead of the tilted poster frame */
+.course-feature .course-poster-img {
+  border: none;
+  transform: none;
+  box-shadow: 0 0 0 1px rgba(200,185,242,0.2), 0 30px 80px rgba(75,25,220,0.55);
+}
+
+.course-feature .btn--jade {
+  background: var(--cf-tan);
+  color: var(--cf-crow);
+}
+.course-feature .btn--jade:hover { box-shadow: 0 6px 24px rgba(220,177,142,0.35); }
+.course-feature .btn--ghost { border-color: rgba(200,185,242,0.5); }
+
+.course-feature-art:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 8px;
+}
+
+.cf-art-star {
+  position: absolute;
+  width: 18%;
+  animation: float-item 7s ease-in-out infinite;
+}
+.cf-art-star--1 { top: -8%;    right: -8%; }
+.cf-art-star--2 { top: 42%;    left: -10%; width: 13%; animation-delay: -2s; }
+.cf-art-star--3 { bottom: -8%; right: 12%; width: 14%; animation-delay: -4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-star,
+  .cf-art-star,
+  .cf-ticker-track { animation: none; }
+  .course-feature-art:hover { transform: none; }
+}
+
+@media (max-width: 860px) {
+  .course-feature { padding: 4.5rem 1rem 5rem; }
+  .course-feature-card {
+    border-radius: 24px;
+    box-shadow: 8px 8px 0 var(--cf-blue);
+    margin-right: 14px;
+  }
+  .course-feature-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 2.2rem 1.4rem 2.6rem;
+    gap: 1.5rem;
+  }
+  .course-feature-art { max-width: 280px; order: -1; }
+  .course-feature-sub { margin-left: auto; margin-right: auto; }
+  .cf-weeks,
+  .course-feature-btns { justify-content: center; }
+  .cf-star--1 { width: 44px; }
+  .cf-star--3 { width: 36px; }
+}
+
+/* Eight nav links: tighten the gaps on small laptops/tablets so nothing
+   wraps before the hamburger takes over at 768px. */
+@media (min-width: 769px) and (max-width: 1000px) {
+  .desktop-nav { gap: 1.1rem; }
+  .desktop-nav a,
+  .site-header .wordmark { white-space: nowrap; }
+  .header-inner { padding-left: 1.2rem; padding-right: 1.2rem; }
 }

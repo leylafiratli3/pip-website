@@ -177,6 +177,37 @@ function mailchimpHostedSubmit(fields) {
   fallback.submit();
 }
 
+// ========== FREE PRACTICE GATE ==========
+// The practice page asks for name + email before showing the audio. Once
+// someone signs up (or is already on the list) we remember it in this
+// browser so they go straight to the audio next time. Storage can be
+// blocked (private mode etc.), so every access is wrapped.
+const PRACTICE_KEY = 'pip-practice-unlocked';
+
+function unlockPractice(firstName, moveFocus) {
+  const gate = document.getElementById('practice-gate');
+  const unlocked = document.getElementById('practice-unlocked');
+  if (!gate || !unlocked) return;
+  try { localStorage.setItem(PRACTICE_KEY, '1'); } catch (e) { /* ignore */ }
+  gate.hidden = true;
+  unlocked.hidden = false;
+  const welcome = unlocked.querySelector('.practice-welcome');
+  if (welcome && firstName) {
+    welcome.textContent = 'Thank you, ' + firstName + '! Here’s your practice ✨';
+  }
+  if (welcome && moveFocus) welcome.focus();
+}
+
+// Mailchimp's thank-you redirect points at practice.html?unlocked=1, so
+// people coming back from the captcha / confirmation page land on the audio.
+if (new URLSearchParams(location.search).has('unlocked')) {
+  unlockPractice('', false);
+} else {
+  try {
+    if (localStorage.getItem(PRACTICE_KEY) === '1') unlockPractice('', false);
+  } catch (e) { /* storage blocked: show the gate */ }
+}
+
 document.querySelectorAll('.mailing-form').forEach((form) => {
   const nameInput = form.querySelector('input[name="FNAME"]');
   const input = form.querySelector('input[type="email"]');
@@ -229,6 +260,10 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
 
       if (data.result === 'success') {
         form.reset();
+        if (form.dataset.unlocks === 'practice') {
+          unlockPractice(firstName, true);
+          return;
+        }
         setMailingStatus(statusEl,
           'Thank you, ' + firstName + '! Keep an eye on your inbox ✨', 'success');
         return;
@@ -237,6 +272,11 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
       if (/captcha/i.test(data.msg || '')) {
         setMailingStatus(statusEl,
           'Taking you to a quick “I’m not a robot” check…', null);
+        // Remember the unlock first: the captcha page navigates away, and
+        // the practice should be waiting when they come back.
+        if (form.dataset.unlocks === 'practice') {
+          try { localStorage.setItem(PRACTICE_KEY, '1'); } catch (e) { /* ignore */ }
+        }
         mailchimpHostedSubmit({ EMAIL: email, FNAME: firstName });
         return;
       }
@@ -244,6 +284,13 @@ document.querySelectorAll('.mailing-form').forEach((form) => {
       // Error path: Mailchimp returns an HTML-ish message. Strip tags and show
       // a friendlier line for the common "already subscribed" case.
       const raw = (data.msg || '').replace(/<[^>]*>/g, '');
+
+      // Already a subscriber? They've earned the practice.
+      if (/already subscribed/i.test(raw) && form.dataset.unlocks === 'practice') {
+        unlockPractice(firstName, true);
+        return;
+      }
+
       const msg = /already subscribed/i.test(raw)
         ? 'You’re already on the list — thank you!'
         : (raw || 'Sorry, we couldn’t subscribe that address.');
